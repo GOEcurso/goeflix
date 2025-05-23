@@ -13,6 +13,7 @@
       justify-content: center;
     }
   </style>
+  <script src="https://www.youtube.com/iframe_api"></script>
 </head>
 <body>
   <div id="yt-container"></div>
@@ -21,15 +22,31 @@
     const encodedID = 'clVFSENRZk01cXc=';
     const videoID = atob(encodedID);
 
-    const iframe = document.createElement('iframe');
-    iframe.width = "800";
-    iframe.height = "450";
-    iframe.src = 'https://www.youtube-nocookie.com/embed/' + videoID + '?controls=0&rel=0';
-    iframe.frameBorder = "0";
-    iframe.allowFullscreen = true;
-    iframe.allow = "accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture";
+    var player;
+    function onYouTubeIframeAPIReady() {
+      player = new YT.Player('yt-container', {
+        height: '450',
+        width: '800',
+        videoId: videoID,
+        playerVars: {
+          'controls': 0,          // Oculta os controles do player
+          'modestbranding': 1,    // Minimiza o branding do YouTube
+          'rel': 0,               // Não exibe vídeos relacionados ao final
+          'fs': 0,                // Desativa o botão de tela cheia
+          'iv_load_policy': 3,    // Desativa anotações
+          'autoplay': 1,          // Ativa o autoplay
+          'mute': 1               // Silencia o vídeo inicialmente
+        },
+        events: {
+          'onReady': onPlayerReady
+        }
+      });
+    }
 
-    document.getElementById('yt-container').appendChild(iframe);
+    function onPlayerReady(event) {
+      // Garante que o vídeo comece a ser reproduzido
+      event.target.playVideo();
+    }
   </script>
 </body>
 </html>
