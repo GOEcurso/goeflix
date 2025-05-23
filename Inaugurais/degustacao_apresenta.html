@@ -2,24 +2,29 @@
 <html lang="pt-br">
 <head>
   <meta charset="UTF-8">
-  <title>Apresentação Degustação</title>
+  <title>Aula Protegida</title>
   <style>
-    body { margin:0; background:#111; }
-    #yt-container { width:100vw; height:100vh; display:flex; align-items:center; justify-content:center; }
+    body { margin:0; background:#000; }
+    #yt-container {
+      width: 100vw;
+      height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
   </style>
 </head>
 <body>
   <div id="yt-container"></div>
   <script>
-    // ID do vídeo em Base64 (exemplo para rUEHCQfM5qw)
+    // Base64 do ID do vídeo: rUEHCQfM5qw => clVFSENRZk01cXc=
     const encodedID = 'clVFSENRZk01cXc=';
     const videoID = atob(encodedID);
 
-    // Cria o iframe do YouTube com privacidade e controles ocultos
     const iframe = document.createElement('iframe');
     iframe.width = "800";
     iframe.height = "450";
-    iframe.src = 'https://www.youtube-nocookie.com/embed/' + videoID + '?controls=0&rel=0&modestbranding=1';
+    iframe.src = 'https://www.youtube-nocookie.com/embed/' + videoID + '?controls=0&rel=0';
     iframe.frameBorder = "0";
     iframe.allowFullscreen = true;
     iframe.allow = "accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture";
