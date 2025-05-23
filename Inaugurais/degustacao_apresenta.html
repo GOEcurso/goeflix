@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <title>Apresentação Degustação</title>
+  <style>
+    body { margin:0; background:#111; }
+    #yt-container { width:100vw; height:100vh; display:flex; align-items:center; justify-content:center; }
+  </style>
+</head>
+<body>
+  <div id="yt-container"></div>
+  <script>
+    // ID do vídeo em Base64 (exemplo: rUEHCQfM5qw vira clVFSENRZk01cXc=)
+    const encodedID = 'clVFSENRZk01cXc=';
+    const videoID = atob(encodedID);
+
+    // Cria o iframe do YouTube
+    const iframe = document.createElement('iframe');
+    iframe.width = "800";
+    iframe.height = "450";
+    iframe.src = 'https://www.youtube.com/embed/' + videoID + '?rel=0&modestbranding=1&controls=0&showinfo=0';
+    iframe.frameBorder = "0";
+    iframe.allowFullscreen = true;
+    iframe.allow = "accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture";
+
+    document.getElementById('yt-container').appendChild(iframe);
+  </script>
+</body>
+</html>
