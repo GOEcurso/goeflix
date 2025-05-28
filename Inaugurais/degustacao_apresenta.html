@@ -11,15 +11,15 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      position: relative; /* necessário para o overlay */
+      position: relative; /* Para permitir posicionar o overlay */
     }
 
-    /* Esconde o cursor quando passar sobre o vídeo */
+    /* Oculta o cursor quando passar o mouse sobre o vídeo */
     #yt-container .overlay {
       cursor: none;
     }
 
-    /* Estilo do overlay transparente */
+    /* Overlay invisível que bloqueia cliques */
     #yt-container .overlay {
       position: absolute;
       top: 0;
@@ -33,7 +33,7 @@
 </head>
 <body>
   <div id="yt-container">
-    <!-- O overlay invisível que bloqueia cliques -->
+    <!-- Overlay invisível para bloquear cliques e esconder o cursor -->
     <div class="overlay"></div>
   </div>
 
