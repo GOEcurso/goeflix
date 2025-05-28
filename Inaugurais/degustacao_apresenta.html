@@ -11,11 +11,32 @@
       display: flex;
       align-items: center;
       justify-content: center;
+      position: relative; /* necessário para o overlay */
+    }
+
+    /* Esconde o cursor quando passar sobre o vídeo */
+    #yt-container .overlay {
+      cursor: none;
+    }
+
+    /* Estilo do overlay transparente */
+    #yt-container .overlay {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: transparent;
+      z-index: 9999;
     }
   </style>
 </head>
 <body>
-  <div id="yt-container"></div>
+  <div id="yt-container">
+    <!-- O overlay invisível que bloqueia cliques -->
+    <div class="overlay"></div>
+  </div>
+
   <script>
     // Base64 do ID do vídeo: rUEHCQfM5qw => clVFSENRZk01cXc=
     const encodedID = 'clVFSENRZk01cXc=';
