@@ -25,10 +25,10 @@
     const iframe = document.createElement('iframe');
     iframe.width = "800";
     iframe.height = "450";
-    iframe.src = 'https://www.youtube-nocookie.com/embed/' + videoID + '?rel=0'; // Removido controls=0
+    iframe.src = 'https://www.youtube-nocookie.com/embed/' + videoID + '?rel=0'; // Controls padrão ativado
     iframe.frameBorder = "0";
     iframe.allowFullscreen = true;
-    iframe.allow = "accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture";
+    iframe.allow = "accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; fullscreen";
 
     document.getElementById('yt-container').appendChild(iframe);
   </script>
