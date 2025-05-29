@@ -11,10 +11,15 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      position: relative; /* Para o overlay ser posicionado corretamente */
+      position: relative; /* Para permitir posicionar o overlay */
     }
 
-    /* Overlay invisível para esconder o cursor e bloquear cliques */
+    /* Oculta o cursor quando passar o mouse sobre o vídeo */
+    #yt-container .overlay {
+      cursor: none;
+    }
+
+    /* Overlay invisível que bloqueia cliques */
     #yt-container .overlay {
       position: absolute;
       top: 0;
@@ -23,12 +28,12 @@
       height: 100%;
       background: transparent;
       z-index: 9999;
-      cursor: none; /* Some o cursor quando o mouse passa sobre o overlay */
     }
   </style>
 </head>
 <body>
   <div id="yt-container">
+    <!-- Overlay invisível para bloquear cliques e esconder o cursor -->
     <div class="overlay"></div>
   </div>
 
@@ -40,10 +45,10 @@
     const iframe = document.createElement('iframe');
     iframe.width = "800";
     iframe.height = "450";
-    iframe.src = 'https://www.youtube-nocookie.com/embed/' + videoID + '?rel=0&controls=1';
+    iframe.src = 'https://www.youtube-nocookie.com/embed/' + videoID + '?controls=0&rel=0';
     iframe.frameBorder = "0";
     iframe.allowFullscreen = true;
-    iframe.allow = "accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; fullscreen";
+    iframe.allow = "accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture";
 
     document.getElementById('yt-container').appendChild(iframe);
   </script>
