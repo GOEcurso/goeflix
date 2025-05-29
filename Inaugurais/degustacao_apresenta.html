@@ -11,25 +11,43 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      position: relative; /* Para o overlay ser posicionado corretamente */
+      position: relative; /* Para posicionar as tarjas */
     }
 
-    /* Overlay invisível que bloqueia cliques, mas cursor aparece normalmente */
-    #yt-container .overlay {
+    /* Tarja superior (cobre título e botão copiar link) */
+    #yt-container .mask-top {
       position: absolute;
       top: 0;
       left: 0;
       width: 100%;
-      height: 100%;
+      height: 20%; /* Ajuste conforme necessário */
       background: transparent;
       z-index: 9999;
-      /* cursor: none; --> REMOVIDO */
+    }
+
+    /* Tarja inferior direita (cobre logo e botão tela cheia) */
+    #yt-container .mask-bottom-right {
+      position: absolute;
+      bottom: 0;
+      right: 0;
+      width: 25%; /* Ajuste conforme necessário */
+      height: 15%; /* Ajuste conforme necessário */
+      background: transparent;
+      z-index: 9999;
+    }
+
+    /* Deixa o cursor normal nessas áreas */
+    #yt-container .mask-top,
+    #yt-container .mask-bottom-right {
+      cursor: default;
     }
   </style>
 </head>
 <body>
   <div id="yt-container">
-    <div class="overlay"></div>
+    <!-- Tarjas seletivas para bloquear cliques em partes perigosas -->
+    <div class="mask-top"></div>
+    <div class="mask-bottom-right"></div>
   </div>
 
   <script>
