@@ -14,7 +14,7 @@
       position: relative; /* Para o overlay ser posicionado corretamente */
     }
 
-    /* Overlay invisível para esconder o cursor e bloquear cliques */
+    /* Overlay invisível que bloqueia cliques, mas cursor aparece normalmente */
     #yt-container .overlay {
       position: absolute;
       top: 0;
@@ -23,7 +23,7 @@
       height: 100%;
       background: transparent;
       z-index: 9999;
-      cursor: none; /* Some o cursor quando o mouse passa sobre o overlay */
+      /* cursor: none; --> REMOVIDO */
     }
   </style>
 </head>
