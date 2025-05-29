@@ -11,6 +11,8 @@
       display: flex;
       align-items: center;
       justify-content: center;
+      position: relative; /* Importante para o cursor funcionar */
+      cursor: none; /* Esta é a regra que esconde o cursor! */
     }
   </style>
 </head>
@@ -25,13 +27,10 @@
     const iframe = document.createElement('iframe');
     iframe.width = "800";
     iframe.height = "450";
-    iframe.src = 'https://www.youtube-nocookie.com/embed/' + videoID + '?rel=0'; // Controls padrão ativado
+    iframe.src = 'https://www.youtube-nocookie.com/embed/' + videoID + '?rel=0';
     iframe.frameBorder = "0";
     iframe.allowFullscreen = true;
     iframe.allow = "accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; fullscreen";
-
-    // 🚀 Solução 4: Sandbox
-    iframe.sandbox = "allow-scripts allow-same-origin allow-presentation";
 
     document.getElementById('yt-container').appendChild(iframe);
   </script>
