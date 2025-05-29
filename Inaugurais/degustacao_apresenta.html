@@ -11,10 +11,9 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      position: relative; /* Para o overlay ser posicionado corretamente */
+      position: relative;
     }
 
-    /* Overlay invisível para esconder o cursor e bloquear cliques */
     #yt-container .overlay {
       position: absolute;
       top: 0;
@@ -23,7 +22,7 @@
       height: 100%;
       background: transparent;
       z-index: 9999;
-      cursor: none; /* Some o cursor quando o mouse passa sobre o overlay */
+      cursor: none;
     }
   </style>
 </head>
@@ -40,7 +39,7 @@
     const iframe = document.createElement('iframe');
     iframe.width = "800";
     iframe.height = "450";
-    iframe.src = 'https://www.youtube-nocookie.com/embed/' + videoID + '?rel=0&controls=1&autoplay=1&mute=1';
+    iframe.src = 'https://www.youtube-nocookie.com/embed/' + videoID + '?rel=0&controls=1&autoplay=1'; // Removido mute=1
     iframe.frameBorder = "0";
     iframe.allowFullscreen = true;
     iframe.allow = "accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; fullscreen";
