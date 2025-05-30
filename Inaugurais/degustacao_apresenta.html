@@ -2,35 +2,34 @@
 <html lang="pt-br">
 <head>
   <meta charset="UTF-8">
-  <title>Teste Plyr Puro</title>
-  <link rel="stylesheet" href="https://cdn.plyr.io/3.7.8/plyr.css" />
+  <title>Aula Protegida com Vime</title>
+  <script type="module" src="https://cdn.jsdelivr.net/npm/@vime/core@5.4.0/dist/vime/vime.esm.js"></script>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@vime/core@5.4.0/themes/default.css" />
   <style>
     body { margin:0; background:#000; }
-    #player {
+    #player-container {
+      width: 100vw;
+      height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    vm-player {
       width: 800px;
       height: 450px;
-      margin: 0 auto;
-      margin-top: 50px;
+      max-width: 100%;
+      max-height: 100%;
     }
   </style>
 </head>
 <body>
 
-  <div id="player" data-plyr-provider="youtube" data-plyr-embed-id="rUEHCQfM5qw"></div>
-
-  <script src="https://cdn.plyr.io/3.7.8/plyr.polyfilled.js"></script>
-  <script>
-    const player = new Plyr('#player', {
-      youtube: {
-        noCookie: true,
-        rel: 0,
-        modestbranding: 1
-      },
-      controls: [
-        'play-large', 'play', 'progress', 'current-time', 'mute', 'volume', 'settings', 'fullscreen'
-      ],
-    });
-  </script>
+  <div id="player-container">
+    <vm-player>
+      <vm-youtube video-id="rUEHCQfM5qw" cookies="false" rel="0" modest-branding="1"></vm-youtube>
+      <vm-default-ui></vm-default-ui>
+    </vm-player>
+  </div>
 
 </body>
 </html>
