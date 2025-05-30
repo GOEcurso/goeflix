@@ -2,27 +2,21 @@
 <html lang="pt-br">
 <head>
   <meta charset="UTF-8">
-  <title>Aula Protegida com Plyr</title>
+  <title>Teste Plyr Puro</title>
   <link rel="stylesheet" href="https://cdn.plyr.io/3.7.8/plyr.css" />
   <style>
     body { margin:0; background:#000; }
-    #player-container {
-      width: 100vw;
-      height: 100vh;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
     #player {
       width: 800px;
       height: 450px;
+      margin: 0 auto;
+      margin-top: 50px;
     }
   </style>
 </head>
 <body>
-  <div id="player-container">
-    <div id="player" data-plyr-provider="youtube" data-plyr-embed-id="rUEHCQfM5qw"></div>
-  </div>
+
+  <div id="player" data-plyr-provider="youtube" data-plyr-embed-id="rUEHCQfM5qw"></div>
 
   <script src="https://cdn.plyr.io/3.7.8/plyr.polyfilled.js"></script>
   <script>
@@ -30,14 +24,13 @@
       youtube: {
         noCookie: true,
         rel: 0,
-        showinfo: 0,
         modestbranding: 1
       },
       controls: [
-        'play-large', 'play', 'progress', 'current-time', 'mute', 'volume',
-        'settings', 'fullscreen'
+        'play-large', 'play', 'progress', 'current-time', 'mute', 'volume', 'settings', 'fullscreen'
       ],
     });
   </script>
+
 </body>
 </html>
