@@ -2,33 +2,64 @@
 <html lang="pt-br">
 <head>
   <meta charset="UTF-8">
-  <title>Aula Protegida com Vime</title>
-  <script type="module" src="https://cdn.jsdelivr.net/npm/@vime/core@5.4.0/dist/vime/vime.esm.js"></script>
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@vime/core@5.4.0/themes/default.css" />
+  <title>Aula Protegida - Fullscreen Fake</title>
   <style>
-    body { margin:0; background:#000; }
-    #player-container {
-      width: 100vw;
-      height: 100vh;
-      display: flex;
-      align-items: center;
-      justify-content: center;
+    body, html {
+      margin: 0;
+      padding: 0;
+      width: 100%;
+      height: 100%;
+      background: #000;
     }
-    vm-player {
-      width: 800px;
-      height: 450px;
-      max-width: 100%;
-      max-height: 100%;
+
+    #yt-container {
+      position: relative;
+      width: 100vw;
+      height: 100vh; /* Fake Fullscreen */
+      overflow: hidden;
+    }
+
+    iframe {
+      width: 100%;
+      height: 100%;
+    }
+
+    /* Tarjas invisíveis anti-clique */
+    .mask-top {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 20%;
+      background: transparent;
+      z-index: 9999;
+    }
+
+    .mask-bottom-right {
+      position: absolute;
+      bottom: 0;
+      right: 0;
+      width: 25%;
+      height: 15%;
+      background: transparent;
+      z-index: 9999;
     }
   </style>
 </head>
 <body>
 
-  <div id="player-container">
-    <vm-player>
-      <vm-youtube video-id="rUEHCQfM5qw" cookies="false" rel="0" modest-branding="1"></vm-youtube>
-      <vm-default-ui></vm-default-ui>
-    </vm-player>
+  <div id="yt-container">
+    <!-- Tarjas invisíveis seletivas -->
+    <div class="mask-top"></div>
+    <div class="mask-bottom-right"></div>
+
+    <!-- Player do YouTube Embed -->
+    <iframe
+      src="https://www.youtube-nocookie.com/embed/rUEHCQfM5qw?rel=0&controls=1&autoplay=1&mute=1"
+      frameborder="0"
+      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+      allowfullscreen>
+    </iframe>
   </div>
 
 </body>
