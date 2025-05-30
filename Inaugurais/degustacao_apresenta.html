@@ -24,7 +24,6 @@
       height: 100%;
     }
 
-    /* Tarjas invisíveis anti-clique */
     .mask-top {
       position: absolute;
       top: 0;
@@ -49,18 +48,22 @@
 <body>
 
   <div id="yt-container">
-    <!-- Tarjas invisíveis seletivas -->
     <div class="mask-top"></div>
     <div class="mask-bottom-right"></div>
 
-    <!-- Player do YouTube Embed -->
     <iframe
       src="https://www.youtube-nocookie.com/embed/rUEHCQfM5qw?rel=0&controls=1&autoplay=1&mute=1"
       frameborder="0"
-      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-      allowfullscreen>
+      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture">
     </iframe>
   </div>
+
+  <script>
+    // Bloquear clique direito
+    document.addEventListener('contextmenu', event => event.preventDefault());
+    // Bloquear duplo clique
+    document.addEventListener('dblclick', event => event.preventDefault());
+  </script>
 
 </body>
 </html>
