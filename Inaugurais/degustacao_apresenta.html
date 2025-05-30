@@ -2,68 +2,42 @@
 <html lang="pt-br">
 <head>
   <meta charset="UTF-8">
-  <title>Aula Protegida</title>
+  <title>Aula Protegida com Plyr</title>
+  <link rel="stylesheet" href="https://cdn.plyr.io/3.7.8/plyr.css" />
   <style>
     body { margin:0; background:#000; }
-    #yt-container {
+    #player-container {
       width: 100vw;
       height: 100vh;
       display: flex;
       align-items: center;
       justify-content: center;
-      position: relative; /* Para posicionar as tarjas */
     }
-
-    /* Tarja superior (cobre título e botão copiar link) */
-    #yt-container .mask-top {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 20%; /* Ajuste conforme necessário */
-      background: transparent;
-      z-index: 9999;
-    }
-
-    /* Tarja inferior direita (cobre logo e botão tela cheia) */
-    #yt-container .mask-bottom-right {
-      position: absolute;
-      bottom: 0;
-      right: 0;
-      width: 25%; /* Ajuste conforme necessário */
-      height: 15%; /* Ajuste conforme necessário */
-      background: transparent;
-      z-index: 9999;
-    }
-
-    /* Deixa o cursor normal nessas áreas */
-    #yt-container .mask-top,
-    #yt-container .mask-bottom-right {
-      cursor: default;
+    #player {
+      width: 800px;
+      height: 450px;
     }
   </style>
 </head>
 <body>
-  <div id="yt-container">
-    <!-- Tarjas seletivas para bloquear cliques em partes perigosas -->
-    <div class="mask-top"></div>
-    <div class="mask-bottom-right"></div>
+  <div id="player-container">
+    <div id="player" data-plyr-provider="youtube" data-plyr-embed-id="rUEHCQfM5qw"></div>
   </div>
 
+  <script src="https://cdn.plyr.io/3.7.8/plyr.polyfilled.js"></script>
   <script>
-    // Base64 do ID do vídeo: rUEHCQfM5qw => clVFSENRZk01cXc=
-    const encodedID = 'clVFSENRZk01cXc=';
-    const videoID = atob(encodedID);
-
-    const iframe = document.createElement('iframe');
-    iframe.width = "800";
-    iframe.height = "450";
-    iframe.src = 'https://www.youtube-nocookie.com/embed/' + videoID + '?rel=0&controls=1&autoplay=1&mute=1';
-    iframe.frameBorder = "0";
-    iframe.allowFullscreen = true;
-    iframe.allow = "accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; fullscreen";
-
-    document.getElementById('yt-container').appendChild(iframe);
+    const player = new Plyr('#player', {
+      youtube: {
+        noCookie: true,
+        rel: 0,
+        showinfo: 0,
+        modestbranding: 1
+      },
+      controls: [
+        'play-large', 'play', 'progress', 'current-time', 'mute', 'volume',
+        'settings', 'fullscreen'
+      ],
+    });
   </script>
 </body>
 </html>
