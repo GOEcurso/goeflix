@@ -29,10 +29,11 @@
 </div>
 
 <script>
-  const CLIENT_ID = "492439138318-is1f8gfhid22rpp54qacplvfnhkr60eg.apps.googleusercontent.com"; // Coloque aqui seu Client ID gerado
+  const CLIENT_ID = "492439138318-is1f8gfhid22rpp54qacplvfnhkr60eg.apps.googleusercontent.com";
 
   function createIframe() {
-    const encodedID = 'clVFSENRZk01cXc=';
+    // Base64 do ID do vídeo: nh3mKviPtZw => bmgzbUt2aVB0Wnc=
+    const encodedID = 'bmgzbUt2aVB0Wnc=';
     const videoID = atob(encodedID);
 
     const iframe = document.createElement('iframe');
