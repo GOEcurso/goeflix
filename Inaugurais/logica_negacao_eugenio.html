@@ -6,18 +6,12 @@
   <style>
     body { margin:0; background:#111; font-family: sans-serif; }
     #yt-container {
-      width:100vw; height:100vh; 
+      width:100vw; height:100vh;
       display:flex; align-items:center; justify-content:center;
       flex-direction:column;
     }
-    #signin-btn {
-      padding:10px 20px; 
-      background:#4285F4; 
-      color:white; 
-      cursor:pointer; 
-      border-radius:5px;
-      border: none;
-    }
+    /* O estilo do botão personalizado pode não ser totalmente aplicado ao botão renderizado pelo Google.
+       O botão do Google terá seu próprio estilo padrão, que pode ser personalizado com as opções de renderButton. */
     iframe {
       width: 800px; height: 450px; border: 0;
     }
@@ -27,13 +21,14 @@
 <body>
 
 <div id="yt-container">
-  <button id="signin-btn">Faça login com o Google para assistir</button>
+  <!-- O botão do Google será renderizado dentro desta div, substituindo qualquer conteúdo existente. -->
+  <div id="signin-btn"></div>
 </div>
 
 <script>
   const CLIENT_ID = "492439138318-is1f8gfhid22rpp54qacplvfnhkr60eg.apps.googleusercontent.com";
 
-  function createIframe() {
+  function createIframe( ) {
     const encodedID = 'bmgzbUt2aVB0Wnc='; // nh3mKviPtZw
     const videoID = atob(encodedID);
 
@@ -42,32 +37,53 @@
     iframe.allowFullscreen = true;
     iframe.allow = "accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture";
 
-    const container = document.getElementById('yt-container');
-    container.innerHTML = '';
+    const container = document.getElementById('yt-container' );
+    container.innerHTML = ''; // Limpa o container (remove o botão de login)
     container.appendChild(iframe);
   }
 
   function handleCredentialResponse(response) {
     console.log("Logado com sucesso:", response);
+    // Neste ponto, o usuário está autenticado com o Google.
+    // Você pode querer enviar o `response.credential` (token de ID) para o seu backend
+    // para verificar o usuário e, em seguida, determinar se ele tem acesso ao vídeo privado.
+    // Para este exemplo, vamos apenas prosseguir para mostrar o vídeo, assumindo que a autenticação é suficiente.
     createIframe();
   }
 
   window.onload = function () {
     google.accounts.id.initialize({
       client_id: CLIENT_ID,
-      callback: handleCredentialResponse
+      callback: handleCredentialResponse,
+      // auto_select: true, // Opcional: seleciona automaticamente uma conta Google se apenas uma estiver logada
+      // ux_mode: "popup" // Padrão é popup, mas pode ser definido explicitamente
     });
 
-    // Mostrar janela de login imediatamente, se possível
+    // Renderiza o botão de login do Google
+    // Isso substituirá o conteúdo da div 'signin-btn' pelo botão real do Google.
+    google.accounts.id.renderButton(
+      document.getElementById('signin-btn'), // O elemento onde o botão será renderizado
+      {
+        theme: "outline",     // "outline" ou "filled"
+        size: "large",        // "small", "medium", "large"
+        text: "signin_with",  // "signin_with", "continue_with", "signup_with"
+        shape: "rectangular", // "rectangular" ou "pill"
+        width: "250"          // Define uma largura específica se desejar
+      }
+    );
+
+    // Tenta exibir o prompt "One Tap".
+    // Se o "One Tap" for exibido e o usuário fizer login, handleCredentialResponse será chamado.
+    // Se o "One Tap" não for exibido ou for ignorado, o botão renderizado acima estará visível para o usuário clicar.
     google.accounts.id.prompt((notification) => {
       if(notification.isNotDisplayed() || notification.isSkippedMoment()) {
-        document.getElementById('signin-btn').style.display = 'block';
+        // O "One Tap" não foi exibido ou foi ignorado. O botão renderizado está visível.
+        // Nenhuma ação necessária aqui em relação à exibição do botão.
+      } else {
+        // O "One Tap" foi exibido. Oculta o botão renderizado, pois o "One Tap" é a interação principal.
+        document.getElementById('signin-btn').style.display = 'none';
       }
     });
-
-    document.getElementById('signin-btn').onclick = () => {
-      google.accounts.id.prompt();
-    };
   };
 </script>
 
