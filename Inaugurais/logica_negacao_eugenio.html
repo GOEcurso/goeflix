@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <title>Aula 01 - Direito Penal com Login Google</title>
   <style>
-    body { margin:0; background:#111; }
+    body { margin:0; background:#111; font-family: sans-serif; }
     #yt-container {
       width:100vw; height:100vh; 
       display:flex; align-items:center; justify-content:center;
@@ -16,8 +16,10 @@
       color:white; 
       cursor:pointer; 
       border-radius:5px;
-      font-family:sans-serif;
-      display:none;
+      border: none;
+    }
+    iframe {
+      width: 800px; height: 450px; border: 0;
     }
   </style>
   <script src="https://accounts.google.com/gsi/client" async defer></script>
@@ -25,22 +27,18 @@
 <body>
 
 <div id="yt-container">
-  <div id="signin-btn">Faça login com o Google para assistir</div>
+  <button id="signin-btn">Faça login com o Google para assistir</button>
 </div>
 
 <script>
   const CLIENT_ID = "492439138318-is1f8gfhid22rpp54qacplvfnhkr60eg.apps.googleusercontent.com";
 
   function createIframe() {
-    // Base64 do ID do vídeo: nh3mKviPtZw => bmgzbUt2aVB0Wnc=
-    const encodedID = 'bmgzbUt2aVB0Wnc=';
+    const encodedID = 'bmgzbUt2aVB0Wnc='; // nh3mKviPtZw
     const videoID = atob(encodedID);
 
     const iframe = document.createElement('iframe');
-    iframe.width = "800";
-    iframe.height = "450";
     iframe.src = 'https://www.youtube.com/embed/' + videoID + '?rel=0&modestbranding=1&controls=0&showinfo=0';
-    iframe.frameBorder = "0";
     iframe.allowFullscreen = true;
     iframe.allow = "accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture";
 
@@ -50,7 +48,6 @@
   }
 
   function handleCredentialResponse(response) {
-    // Usuário está logado
     console.log("Logado com sucesso:", response);
     createIframe();
   }
@@ -61,14 +58,15 @@
       callback: handleCredentialResponse
     });
 
+    // Mostrar janela de login imediatamente, se possível
     google.accounts.id.prompt((notification) => {
-      if(notification.isNotDisplayed()){
+      if(notification.isNotDisplayed() || notification.isSkippedMoment()) {
         document.getElementById('signin-btn').style.display = 'block';
       }
     });
 
     document.getElementById('signin-btn').onclick = () => {
-      google.accounts.id.prompt(); 
+      google.accounts.id.prompt();
     };
   };
 </script>
